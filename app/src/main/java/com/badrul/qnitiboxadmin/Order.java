@@ -21,9 +21,11 @@ public class Order {
     private String orderStatus;
     private String completeDate;
     private String completeTime;
+    private String totalPrice;
 
 
-    public Order(int orderID, String cardID, String nameID, String phoneID, String emailID, String matrixID, String orderType, String orderDay, String orderDate, String orderTime, String orderQTT, String orderUserType, String puLocation, String puTime, String orderStatus, String completeDate, String completeTime) {
+
+    public Order(int orderID, String cardID, String nameID, String phoneID, String emailID, String matrixID, String orderType, String orderDay, String orderDate, String orderTime, String orderQTT, String orderUserType, String puLocation, String puTime, String orderStatus, String completeDate, String completeTime,String totalPrice) {
 
         this.orderID = orderID;
         this.nameID = nameID;
@@ -42,6 +44,7 @@ public class Order {
         this.orderStatus = orderStatus;
         this.completeDate = completeDate;
         this.completeTime = completeTime;
+        this.totalPrice = totalPrice;
 
 
     }
@@ -112,5 +115,9 @@ public class Order {
 
     public String getCompleteTime() {
         return completeTime;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
     }
 }

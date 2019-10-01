@@ -16,7 +16,7 @@ public class Config {
 
  public static final String FEEDBACK_URL = "http://gmartbox.cvmall.my/apps/admin/feedback.php";
 
-
+ public static final String TOTAL_FOOD_PRICE = "totalfoodPrice";
 
  public static final String SCANNER_URL = "http://gmartbox.cvmall.my/apps/admin/scanner.php?orderID=";
 

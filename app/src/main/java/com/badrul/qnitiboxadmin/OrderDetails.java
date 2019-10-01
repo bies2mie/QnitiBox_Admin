@@ -45,7 +45,7 @@ import java.util.Map;
 
 public class OrderDetails extends AppCompatActivity {
 
-    TextView order,name,phone,email,matrix,orType,orDay,orDatenTime,orQTT,orUsrType,pickupLo,pickupTime,orStat,comDatenTime;
+    TextView order,name,phone,email,matrix,orType,orDay,orDatenTime,orQTT,orUsrType,pickupLo,pickupTime,orStat,comDatenTime,totprice;
     Button cancel,accept;
     int hour;
     String curTime;
@@ -76,6 +76,7 @@ public class OrderDetails extends AppCompatActivity {
         String orderStatus = sharedPreferences.getString(Config.ORDER_STATUS, "Not Available");
         String completeDate = sharedPreferences.getString(Config.ORDER_COMPLETEDATE, "Not Available");
         String completeTime = sharedPreferences.getString(Config.ORDER_COMPLETETIME, "Not Available");
+        String totalPrice1 = sharedPreferences.getString(Config.TOTAL_FOOD_PRICE, "Not Available");
 
         order = findViewById(R.id.orderIDtxt);
         name = findViewById(R.id.buyerNametxt);
@@ -91,6 +92,7 @@ public class OrderDetails extends AppCompatActivity {
         pickupTime = findViewById(R.id.puTimetxt);
         orStat = findViewById(R.id.orderStat);
         comDatenTime = findViewById(R.id.completedatentime);
+        totprice = findViewById(R.id.totalPricetxt);
 
         cancel = findViewById(R.id.cancelBtn);
         accept = findViewById(R.id.acceptBtn);
@@ -120,6 +122,7 @@ public class OrderDetails extends AppCompatActivity {
         pickupTime.setText(puTime);
         orStat.setText(orderStatus);
         comDatenTime.setText(completeDate+" "+completeTime);
+        totprice.setText("RM "+totalPrice1);
 
         if (orderStatus.equalsIgnoreCase("Complete")||orderStatus.equalsIgnoreCase("Cancel")){
 

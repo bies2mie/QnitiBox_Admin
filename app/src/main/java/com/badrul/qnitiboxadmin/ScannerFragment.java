@@ -78,6 +78,7 @@ public class ScannerFragment extends Fragment {
     private String orderStatus;
     private String completeDate;
     private String completeTime;
+    private String totalPrice;
 
 
     @Nullable
@@ -217,7 +218,8 @@ public class ScannerFragment extends Fragment {
                                         puTime = product.getString("puTime"),
                                         orderStatus = product.getString("orderStatus"),
                                         completeDate = product.getString("completeDate"),
-                                        completeTime = product.getString("completeTime")
+                                        completeTime = product.getString("completeTime"),
+                                        totalPrice = product.getString("totalPrice")
                                 ));
                             }
 
@@ -246,6 +248,7 @@ public class ScannerFragment extends Fragment {
                             editor.putString(Config.ORDER_STATUS, orderStatus);
                             editor.putString(Config.ORDER_COMPLETEDATE, completeDate);
                             editor.putString(Config.ORDER_COMPLETETIME, completeTime);
+                            editor.putString(Config.TOTAL_FOOD_PRICE, totalPrice);
 
 
                             // Saving values to editor

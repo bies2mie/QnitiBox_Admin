@@ -46,7 +46,6 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
     // ImageButton logout;
     ImageButton logout;
     String userEmail_Shared;
-    String userID;
     String image;
     TextView userNama_tx;
     TextView userCredit_tx;
@@ -55,6 +54,7 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
     String userPhone;
     ImageView imgGone;
     TextView txtGone;
+    String adminLocation;
     //int curCheckPosition = 0;
 
 
@@ -64,19 +64,7 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
         View myView = inflater.inflate(R.layout.fragment_processing, container, false);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, getActivity().getApplicationContext().MODE_PRIVATE);
         loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-
-        //If we will get true
-        if(loggedIn==false){
-            //We will start the Profile Activity
-            Intent intent = new Intent(getActivity().getApplicationContext(), LoginPage.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getActivity().finish();
-            startActivity(intent);
-            getActivity().getSupportFragmentManager().popBackStack();
-        }
-
-
-        userID = sharedPreferences.getString(Config.USER_ID2, "Not Available");
+        adminLocation = sharedPreferences.getString(Config.ADMIN_LOCATION,"Not Available");
 
         //logout =myView.findViewById(R.id.logoutBtn);
         userNama_tx = myView.findViewById(R.id.userNama1);
@@ -87,7 +75,7 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
         txtGone = myView.findViewById(R.id.textViewGone);
 
         userNama = sharedPreferences.getString(Config.ID_SHARED_PREF,"Not Available");
-        userPhone = sharedPreferences.getString(Config.PHONE_ID2,"Not Available");
+
 
         //userNama_tx.setText(userNama);
         userCredit_tx.setText(userNama);
@@ -175,7 +163,7 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
 
         final ProgressDialog loading = ProgressDialog.show(getActivity(),"Please Wait","Contacting Server",false,false);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.ORDER_STATUS_PROCESSING,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.ORDER_STATUS_PROCESSING+adminLocation,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

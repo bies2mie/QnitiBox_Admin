@@ -23,7 +23,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LoginPage extends AppCompatActivity {
@@ -31,11 +37,16 @@ public class LoginPage extends AppCompatActivity {
     //boolean variable to check user is logged in or not
     //initially it is false
     private boolean loggedIn = false;
-
+    List<User> userList;
     String userEmailID;
     String passwordP;
     private EditText inputICnum;
     private EditText inputPassword;
+    int ID;
+    String adminID;
+    String adminName;
+    String adminPhone;
+    String adminLocation;
 
 
     @Override
@@ -47,7 +58,7 @@ public class LoginPage extends AppCompatActivity {
         inputICnum = findViewById(R.id.icnum);
         inputPassword = findViewById(R.id.password);
 
-
+        userList = new ArrayList<>();
         Button btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -112,12 +123,7 @@ public class LoginPage extends AppCompatActivity {
                             //Saving values to editor
                             editor.commit();
 
-                            loading.dismiss();
-
-                            Intent i = new Intent(LoginPage.this, MainActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(i);
-                            finish();
+                            loadUser();
 
                         }else{
                             //If the server response is not success
@@ -160,6 +166,90 @@ public class LoginPage extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void loadUser(){
+        final ProgressDialog loading = ProgressDialog.show(this,"Please Wait","Contacting Server",false,false);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.PROFILE+userEmailID,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            //converting the string to json array object
+                            JSONArray array = new JSONArray(response);
+
+                            //traversing through all the object
+                            for (int i = 0; i < array.length(); i++) {
+
+                                //getting product object from json array
+                                JSONObject user = array.getJSONObject(i);
+
+                                //adding the product to product list
+                                userList.add(new User(
+                                        ID = user.getInt("id"),
+                                        adminID = user.getString("adminID"),
+                                        adminName = user.getString("adminName"),
+                                        adminPhone = user.getString("adminPhone"),
+                                        adminLocation = user.getString("adminLocation")
+
+                                ));
+
+                            }
+
+                            //add shared preference ID,nama,credit here
+                            SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME,
+                                    Context.MODE_PRIVATE);
+
+                            // Creating editor to store values to shared preferences
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                            // Adding values to editor
+
+                            editor.putString(Config.A_ID2, String.valueOf(ID));
+                            editor.putString(Config.ADMIN_ID2, adminID);
+                            editor.putString(Config.ADMIN_NAME2, adminName);
+                            editor.putString(Config.ADMIN_PHONE2, adminPhone);
+                            editor.putString(Config.ADMIN_LOCATION, adminLocation);
+
+                            // Saving values to editor
+                            editor.commit();
+
+                            loading.dismiss();
+
+                            //Starting profile activity
+                            Intent intent = new Intent(LoginPage.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
+                            loading.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        loading.dismiss();
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            Toast.makeText(LoginPage.this,"No internet . Please check your connection",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        else{
+
+                            Toast.makeText(LoginPage.this, error.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //adding our stringrequest to queue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }

@@ -20,9 +20,9 @@ public class Config {
 
  public static final String SCANNER_URL = "http://gmartbox.cvmall.my/apps/admin/scanner.php?orderID=";
 
-    public static final String ORDER_STATUS_COMPLETE = "http://gmartbox.cvmall.my/apps/admin/orderstatuscomplete.php";
-    public static final String ORDER_STATUS_PROCESSING = "http://gmartbox.cvmall.my/apps/admin/orderstatusprocessing.php";
-   // public static final String PROFILE = "http://gmartbox.cvmall.my/apps/getuserinfo.php?userEmail=";
+    public static final String ORDER_STATUS_COMPLETE = "http://gmartbox.cvmall.my/apps/admin/orderstatuscomplete.php?orderLocation=";
+    public static final String ORDER_STATUS_PROCESSING = "http://gmartbox.cvmall.my/apps/admin/orderstatusprocessing.php?orderLocation=";
+    public static final String PROFILE = "http://gmartbox.cvmall.my/apps/admin/getadmininfo.php?userEmail=";
     //FOR ORDER
     public static final String ORDER_ID = "orderid";
     public static final String CARD_ID = "cardID";
@@ -46,11 +46,11 @@ public class Config {
     public static final String ORDER_STATUS = "orderStatus";
 
     //For User
-    public static final String USER_ID2 = "userID2";
-    public static final String NAME_ID2 = "nameID2";
-    public static final String PHONE_ID2 = "phoneID2";
-    public static final String EMAIL_ID2 = "emailID2";
-    public static final String MATRIX_ID2 = "matrixID";
+ public static final String A_ID2 = "aID2";
+ public static final String ADMIN_ID2 = "adminID2";
+ public static final String ADMIN_NAME2 = "anameID2";
+ public static final String ADMIN_PHONE2 = "aphoneID2";
+ public static final String ADMIN_LOCATION = "alocationID";
 
 
     public static final String LOGIN_URL = "http://gmartbox.cvmall.my/apps/admin/loginadmin.php";

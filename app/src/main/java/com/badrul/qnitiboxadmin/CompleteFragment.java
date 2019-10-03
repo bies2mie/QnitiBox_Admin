@@ -55,6 +55,7 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
     ImageView imgGone;
     TextView txtGone;
     //int curCheckPosition = 0;
+    String adminLocation;
 
 
     @Nullable
@@ -63,9 +64,8 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
         View myView = inflater.inflate(R.layout.fragment_complete, container, false);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, getActivity().getApplicationContext().MODE_PRIVATE);
-        userID = sharedPreferences.getString(Config.USER_ID2, "Not Available");
         String userNama = sharedPreferences.getString(Config.ID_SHARED_PREF,"Not Available");
-        String userPhone = sharedPreferences.getString(Config.PHONE_ID2,"Not Available");
+        adminLocation = sharedPreferences.getString(Config.ADMIN_LOCATION,"Not Available");
 
 
         //logout =myView.findViewById(R.id.logoutBtn);
@@ -157,7 +157,7 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
 
         final ProgressDialog loading = ProgressDialog.show(getActivity(),"Please Wait","Contacting Server",false,false);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.ORDER_STATUS_COMPLETE,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.ORDER_STATUS_COMPLETE+adminLocation,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

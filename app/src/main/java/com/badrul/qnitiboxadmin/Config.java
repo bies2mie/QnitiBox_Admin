@@ -23,6 +23,9 @@ public class Config {
     public static final String ORDER_STATUS_COMPLETE = "http://gmartbox.cvmall.my/apps/admin/orderstatuscomplete.php?orderLocation=";
     public static final String ORDER_STATUS_PROCESSING = "http://gmartbox.cvmall.my/apps/admin/orderstatusprocessing.php?orderLocation=";
     public static final String PROFILE = "http://gmartbox.cvmall.my/apps/admin/getadmininfo.php?userEmail=";
+
+    public static final String PROCESSING_CHECK_TODAY_QTT = "http://gmartbox.cvmall.my/apps/admin/gettodayqtt.php?currentDate=";
+    public static final String COMPLETE_CHECK_TODAY_QTT = "http://gmartbox.cvmall.my/apps/admin/gettodayqttcomplete.php?currentDate=";
     //FOR ORDER
     public static final String ORDER_ID = "orderid";
     public static final String CARD_ID = "cardID";

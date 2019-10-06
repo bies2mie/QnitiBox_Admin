@@ -329,7 +329,7 @@ public class OrderDetails extends AppCompatActivity {
                                     else{
 
 
-                                        final ProgressDialog loading = ProgressDialog.show(OrderDetails.this,"Sila Tunggu","Menghantar Data",false,false);
+                                        final ProgressDialog loading = ProgressDialog.show(OrderDetails.this,"Please Wait","Sending Data",false,false);
 
                                         StringRequest stringRequest = new StringRequest(Request.Method.POST,Config.ACCEPT_ORDER_URL, new Response.Listener<String>() {
                                             @Override

@@ -41,6 +41,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         holder.textViewTitle.setText(order.getOrderType()); //getName
         holder.textViewShortDesc.setText(order.getOrderDay()); //GetICnum
+        holder.textShowDate.setText(order.getOrderDate());
         holder.textViewRating.setText("QTT: "+order.getOrderQTT()); //getStatus
         holder.textViewPrice.setText("Pickup: "+order.getPuLocation()+"  "+order.getPuTime());  //getTotalPrice
 
@@ -59,7 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     class OrderViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitle, textViewShortDesc, textViewRating, textViewPrice;
+        TextView textViewTitle, textViewShortDesc, textViewRating, textViewPrice,textShowDate;
         // ImageView imageView;
         RelativeLayout test;
 
@@ -71,6 +72,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             textViewShortDesc = itemView.findViewById(R.id.textViewShortDesc);
             textViewRating = itemView.findViewById(R.id.textViewRating);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
+            textShowDate = itemView.findViewById(R.id.showDate);
             //imageView = itemView.findViewById(R.id.imageView);
         }
     }

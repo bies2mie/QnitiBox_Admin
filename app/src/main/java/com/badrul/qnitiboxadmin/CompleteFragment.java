@@ -34,8 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CompleteFragment extends Fragment implements OrderAdapter.OnItemClicked{
 
@@ -56,6 +59,8 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
     TextView txtGone;
     //int curCheckPosition = 0;
     String adminLocation;
+    String currentDate;
+    TextView showtodayQTT;
 
 
     @Nullable
@@ -67,7 +72,7 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
         String userNama = sharedPreferences.getString(Config.ID_SHARED_PREF,"Not Available");
         adminLocation = sharedPreferences.getString(Config.ADMIN_LOCATION,"Not Available");
 
-
+        currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         //logout =myView.findViewById(R.id.logoutBtn);
         userNama_tx = myView.findViewById(R.id.userNama1);
         userCredit_tx = myView.findViewById(R.id.userCredit1);
@@ -75,6 +80,7 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
         logout = myView.findViewById(R.id.logout);
         imgGone = myView.findViewById(R.id.imageViewGone);
         txtGone = myView.findViewById(R.id.textViewGone);
+        showtodayQTT = myView.findViewById(R.id.showtodayqtt);
 
 
         //userNama_tx.setText(userNama);
@@ -96,7 +102,7 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
 
         //this method will fetch and parse json
         //to display it in recyclerview
-
+        todayProcessQTT();
         loadOrder();
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -301,5 +307,43 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
         startActivity(i);
         //finish();
     }
+    public void todayProcessQTT(){
 
+        final ProgressDialog loading = ProgressDialog.show(getActivity(),"Please Wait","Contacting Server",false,false);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                Config.COMPLETE_CHECK_TODAY_QTT+currentDate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                loading.dismiss();
+                showtodayQTT.setText(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                loading.dismiss();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(),
+                            "No internet. Please check your connection",
+                            Toast.LENGTH_LONG).show();
+                }else{
+
+                    Toast.makeText(getActivity(),
+                            error.toString(),
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        })
+                ;
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
 }

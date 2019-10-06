@@ -33,8 +33,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemClicked{
 
@@ -49,12 +52,15 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
     String image;
     TextView userNama_tx;
     TextView userCredit_tx;
+    TextView showtodayQTT;
     boolean loggedIn;
     String userNama;
     String userPhone;
     ImageView imgGone;
     TextView txtGone;
     String adminLocation;
+    String currentDate;
+
     //int curCheckPosition = 0;
 
 
@@ -66,6 +72,8 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
         loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
         adminLocation = sharedPreferences.getString(Config.ADMIN_LOCATION,"Not Available");
 
+        currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+
         //logout =myView.findViewById(R.id.logoutBtn);
         userNama_tx = myView.findViewById(R.id.userNama1);
         userCredit_tx = myView.findViewById(R.id.userCredit1);
@@ -73,6 +81,7 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
         logout = myView.findViewById(R.id.logout);
         imgGone = myView.findViewById(R.id.imageViewGone);
         txtGone = myView.findViewById(R.id.textViewGone);
+        showtodayQTT = myView.findViewById(R.id.showtodayqtt);
 
         userNama = sharedPreferences.getString(Config.ID_SHARED_PREF,"Not Available");
 
@@ -96,7 +105,7 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
 
         //this method will fetch and parse json
         //to display it in recyclerview
-
+        todayProcessQTT();
         loadOrder();
 
 
@@ -308,5 +317,43 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
         startActivity(i);
         //finish();
     }
+    public void todayProcessQTT(){
 
+        final ProgressDialog loading = ProgressDialog.show(getActivity(),"Please Wait","Contacting Server",false,false);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                Config.PROCESSING_CHECK_TODAY_QTT+currentDate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                loading.dismiss();
+                showtodayQTT.setText(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                loading.dismiss();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(),
+                            "No internet. Please check your connection",
+                            Toast.LENGTH_LONG).show();
+                }else{
+
+                    Toast.makeText(getActivity(),
+                            error.toString(),
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        })
+                ;
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
 }

@@ -102,7 +102,35 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:text="You have no order" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="#f5ce42"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="Total Quantity of Food Today in Processing:" />
+
+        <TextView
+            android:id="@+id/showtodayqtt"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#b30000"
+            android:layout_weight="2"
+            android:text="Error" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/recylcerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

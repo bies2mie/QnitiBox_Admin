@@ -42,8 +42,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.textViewTitle.setText(order.getOrderType()); //getName
         holder.textViewShortDesc.setText(order.getOrderDay()); //GetICnum
         holder.textShowDate.setText(order.getOrderDate());
-        holder.textViewRating.setText("QTT: "+order.getOrderQTT()); //getStatus
-        holder.textViewPrice.setText("Pickup: "+order.getPuLocation()+"  "+order.getPuTime());  //getTotalPrice
+        holder.textViewRating.setText("QTY: "+order.getOrderQTT()); //getStatus
+        holder.textViewPrice.setText("Pick-up: "+order.getPuLocation()+"  "+order.getPuTime());  //getTotalPrice
 
         holder.test.setOnClickListener(new View.OnClickListener() {
             @Override

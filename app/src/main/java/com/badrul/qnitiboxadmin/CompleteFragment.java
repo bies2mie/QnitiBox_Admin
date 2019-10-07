@@ -316,8 +316,15 @@ public class CompleteFragment extends Fragment implements OrderAdapter.OnItemCli
             @Override
             public void onResponse(String response) {
 
+                if(response.equalsIgnoreCase("")){
+
+                    showtodayQTT.setText("0");
+                }
+                else {
+
+                    showtodayQTT.setText(response);
+                }
                 loading.dismiss();
-                showtodayQTT.setText(response);
 
             }
         }, new Response.ErrorListener() {

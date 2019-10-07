@@ -326,8 +326,16 @@ public class ProcessingFragment extends Fragment implements OrderAdapter.OnItemC
             @Override
             public void onResponse(String response) {
 
+                if(response.equalsIgnoreCase("")){
+
+                    showtodayQTT.setText("0");
+                }
+                else {
+
+                    showtodayQTT.setText(response);
+                }
+
                 loading.dismiss();
-                showtodayQTT.setText(response);
 
             }
         }, new Response.ErrorListener() {

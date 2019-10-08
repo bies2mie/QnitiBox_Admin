@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_weight="1"
-            android:text="Total Quantity of Food Today in Processing:" />
+            android:text="Total Quantity of Food Order Today in Processing:" />
 
         <TextView
             android:id="@+id/showtodayqtt"

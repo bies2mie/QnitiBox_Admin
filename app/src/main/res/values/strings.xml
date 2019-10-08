@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QnitiBox Admin</string>
+    <string name="app_name">QnitiBox Staff</string>
     <string name="title_scanner">Scanner</string>
     <string name="title_processing">Processing</string>
     <string name="title_complete">Complete</string>

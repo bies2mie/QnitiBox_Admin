@@ -77,6 +77,8 @@ public class OrderDetails extends AppCompatActivity {
         String completeDate = sharedPreferences.getString(Config.ORDER_COMPLETEDATE, "Not Available");
         String completeTime = sharedPreferences.getString(Config.ORDER_COMPLETETIME, "Not Available");
         String totalPrice1 = sharedPreferences.getString(Config.TOTAL_FOOD_PRICE, "Not Available");
+        String fromScanner = sharedPreferences.getString(Config.FROM_SCANNER, "NO");
+
 
         order = findViewById(R.id.orderIDtxt);
         name = findViewById(R.id.buyerNametxt);
@@ -124,7 +126,7 @@ public class OrderDetails extends AppCompatActivity {
         comDatenTime.setText(completeDate+" "+completeTime);
         totprice.setText("RM "+totalPrice1);
 
-        if (orderStatus.equalsIgnoreCase("Complete")||orderStatus.equalsIgnoreCase("Cancel")){
+        if (orderStatus.equalsIgnoreCase("Complete")||orderStatus.equalsIgnoreCase("Cancel")||fromScanner.equalsIgnoreCase("NO")){
 
             accept.setVisibility(View.GONE);
             cancel.setVisibility(View.GONE);

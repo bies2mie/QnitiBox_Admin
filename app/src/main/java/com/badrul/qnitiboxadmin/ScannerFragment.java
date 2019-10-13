@@ -249,6 +249,8 @@ public class ScannerFragment extends Fragment {
                             editor.putString(Config.ORDER_COMPLETEDATE, completeDate);
                             editor.putString(Config.ORDER_COMPLETETIME, completeTime);
                             editor.putString(Config.TOTAL_FOOD_PRICE, totalPrice);
+                            editor.putString(Config.FROM_SCANNER,"YES");
+
 
 
                             // Saving values to editor

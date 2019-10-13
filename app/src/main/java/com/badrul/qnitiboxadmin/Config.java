@@ -48,6 +48,8 @@ public class Config {
     public static final String COMPLETE_TIME = "completeTime";
     public static final String ORDER_STATUS = "orderStatus";
 
+    public static final String FROM_SCANNER = "frScanner";
+
     //For User
  public static final String A_ID2 = "aID2";
  public static final String ADMIN_ID2 = "adminID2";

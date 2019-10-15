@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "159745587170",
+    "firebase_url": "https://qnitiboxadmin.firebaseio.com",
+    "project_id": "qnitiboxadmin",
+    "storage_bucket": "qnitiboxadmin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159745587170:android:c1025c0c221de91271abbb",
+        "android_client_info": {
+          "package_name": "com.badrul.qnitiboxadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159745587170-crdvc8qnvcajje2s2ovfroq74r6om2sh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.badrul.qnitiboxadmin",
+            "certificate_hash": "04df549be231fd2b3da632f2d749a0a043d902b8"
+          }
+        },
+        {
+          "client_id": "159745587170-cqnah6qjs7vdvcoqbi3li1np820g243j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI2W22p8UxCk42XzMXU2MkJCayHFOD_aQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159745587170-cqnah6qjs7vdvcoqbi3li1np820g243j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

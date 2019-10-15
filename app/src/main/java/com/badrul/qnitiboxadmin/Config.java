@@ -49,6 +49,7 @@ public class Config {
     public static final String ORDER_STATUS = "orderStatus";
 
     public static final String FROM_SCANNER = "frScanner";
+    public static final String USER_TOKEN = "userToken";
 
     //For User
  public static final String A_ID2 = "aID2";

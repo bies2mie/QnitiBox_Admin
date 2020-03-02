@@ -66,6 +66,7 @@ public class LoginPage extends AppCompatActivity {
 
         userList = new ArrayList<>();
         Button btnLogin = findViewById(R.id.btnLogin);
+        Button toRegister = findViewById(R.id.btntoRegister);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -81,6 +82,18 @@ public class LoginPage extends AppCompatActivity {
 
                     }
                 });
+
+        toRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(LoginPage.this, RegisterPage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+        });
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

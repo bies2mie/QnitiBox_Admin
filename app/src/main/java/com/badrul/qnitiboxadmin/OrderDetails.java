@@ -95,6 +95,8 @@ public class OrderDetails extends AppCompatActivity {
         orStat = findViewById(R.id.orderStat);
         comDatenTime = findViewById(R.id.completedatentime);
         totprice = findViewById(R.id.totalPricetxt);
+        ImageView imgView = findViewById(R.id.imageViewQR);
+        TextView showQR = findViewById(R.id.showqrtxt);
 
         cancel = findViewById(R.id.cancelBtn);
         accept = findViewById(R.id.acceptBtn);
@@ -130,6 +132,8 @@ public class OrderDetails extends AppCompatActivity {
 
             accept.setVisibility(View.GONE);
             cancel.setVisibility(View.GONE);
+            imgView.setVisibility(View.GONE);
+            showQR.setVisibility(View.GONE);
 
         }
 
@@ -142,6 +146,19 @@ public class OrderDetails extends AppCompatActivity {
             startActivity(intent);
             finish();
 
+        }
+
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+
+
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(orderID, BarcodeFormat.QR_CODE,500,500);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            imgView.setImageBitmap(bitmap);
+        } catch (
+                WriterException e) {
+            e.printStackTrace();
         }
 
         cancel.setOnClickListener(new View.OnClickListener() {
